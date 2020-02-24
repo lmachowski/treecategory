@@ -1,0 +1,19 @@
+version: '3'
+services:
+  php:
+    image: php:7.2-fpm
+    container_name: php-fpm
+    ports:
+      - '9002:9000'
+    volumes:
+      - ../:/var/www/treecategory:cached
+  nginx:
+    build: nginx
+    container_name: nginx
+    ports:
+      - '8081:80'
+    links:
+      - php
+    volumes:
+      - ../:/var/www/treecategory/
+      - ./logs/nginx/:/var/log/nginx
